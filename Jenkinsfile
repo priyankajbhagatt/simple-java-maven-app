@@ -13,9 +13,19 @@ pipeline {
                 '''
             }
         }
-        stage('Build') {
+        stage('Compile') {
             steps {
-                sh 'mvn -B -DskipTests clean package'
+                bat 'mvn clean compile'
+            }
+        }
+        stage('Test') {
+            steps {
+                bat 'mvn test'
+            }
+        }
+        stage('Install') {
+            steps {
+                bat 'mvn install'
             }
         }
     }

@@ -1,8 +1,23 @@
-node {
-  stage ('Build') {
-    git url: 'https://github.com/priyankajbhagatt/simple-java-maven-app'
-    withMaven {
-      sh "mvn clean verify"
-    } // withMaven will discover the generated Maven artifacts, JUnit Surefire & FailSafe reports and FindBugs reports
-  }
+pipeline {
+    agent any
+    tools { 
+        maven 'Maven3' 
+        jdk 'jdk1.8' 
+    }
+    stages {
+        stage ('Initialize') {
+            steps {
+                sh '''
+                    echo "PATH = ${PATH}"
+                    echo "M2_HOME = ${M2_HOME}"
+                ''' 
+            }
+        }
+
+        stage ('Build') {
+            steps {
+                echo 'This is a minimal pipeline.'
+            }
+        }
+    }
 }

@@ -21,7 +21,7 @@
         <!-- Build an executable JAR -->
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-jar-plugin</artifactId>
-        <version>3.8.1</version>
+        <version>3.0.2</version>
         <configuration>
           <archive>
             <manifest>
@@ -30,8 +30,6 @@
               <mainClass>com.mycompany.app.App</mainClass>
             </manifest>
           </archive>
-          <source>1.8</source>
-          <target>1.8</target>
         </configuration>
       </plugin>
     </plugins>

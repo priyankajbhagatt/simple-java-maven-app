@@ -1,28 +1,27 @@
 pipeline {
     agent any
-    tools { 
-        maven 'Maven3' 
-        jdk 'jdk1.8' 
+    tools {
+        maven 'Maven3'
+        jdk 'jdk1.8'
     }
     stages {
-        stage('Build') {
+        stage ('Initialize') {
             steps {
-                sh 'mvn -B -DskipTests clean package'
+                sh '''
+                    echo "PATH = ${PATH}"
+                    echo "M2_HOME = ${M2_HOME}"
+                '''
             }
         }
-        stage('Test') {
+
+        stage ('Build') {
             steps {
-                sh 'mvn test'
+                sh 'mvn -Dmaven.test.failure.ignore=true install' 
             }
             post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
+                success {
+                    junit 'target/surefire-reports/**/*.xml' 
                 }
-            }
-        }
-        stage('Deliver') {
-            steps {
-                sh './jenkins/scripts/deliver.sh'
             }
         }
     }

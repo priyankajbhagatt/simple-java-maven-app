@@ -5,7 +5,7 @@ pipeline {
         jdk 'jdk1.8.1' 
     }
     stages {
-        stage ('Initialize') {
+        stage ('Initialized') {
             steps {
                 sh '''
                     echo "PATH = ${PATH}"
@@ -14,12 +14,12 @@ pipeline {
             }
         }
 
-        stage ('Build') {
+        stage ('Builder') {
             steps {
                 echo 'This is a minimal pipeline.'
             }
         }
-        stage ('End') {
+        stage ('Ending') {
             steps {
                 echo 'This is a end of pipeline.'
             }

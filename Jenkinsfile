@@ -19,5 +19,10 @@ pipeline {
                 echo 'This is a minimal pipeline.'
             }
         }
+        stage ('End') {
+            steps {
+                echo 'This is a end of pipeline.'
+            }
+        }
     }
 }

@@ -3,6 +3,7 @@ pipeline {
     tools {
         maven 'Maven3'
         jdk 'jdk1.8'
+        terraform 'terraform'
     }
     stages {
         stage ('Initialize') {

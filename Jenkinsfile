@@ -50,6 +50,11 @@ pipeline {
                 }
             }
         }
+        stage ('Initialize Mven') {
+            steps {
+                sh 'mvn version'
+            }
+        }
         stage ('Initialize terraform') {
             steps {
                 sh 'terraform version'

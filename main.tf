@@ -97,8 +97,7 @@ resource "azurerm_virtual_machine" "site" {
   location            = "${var.location}"
   resource_group_name = "${azurerm_resource_group.tf_azure_guide.name}"
   vm_size             = "${var.vm_size}"
-
-  network_interface_ids         = ["${azurerm_network_interface.tf-guide-nic.id}"]
+  #network_interface_ids         = ["${azurerm_network_interface.tf-guide-nic.id}"]
   delete_os_disk_on_termination = "true"
 
   storage_image_reference {

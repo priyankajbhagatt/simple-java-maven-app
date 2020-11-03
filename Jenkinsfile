@@ -60,5 +60,10 @@ pipeline {
                 sh 'terraform version'
             }
         }
+        stage ('Initialize terraform') {
+            steps {
+                sh 'terraform init'
+            }
+        }
     }
 }

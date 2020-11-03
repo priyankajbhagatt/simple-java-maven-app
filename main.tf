@@ -5,9 +5,7 @@ provider "azurerm" {
     client_secret   = "QPbA1fCs.5O.E684RVRsLwyf5V5__tqcO7"
     tenant_id       = "b29efcb9-37c5-4752-abfa-c6e3968ec3a3"
       features {}
-    }
 }
-
 #data "azurerm_client_config" "current" {}
 
 resource "azurerm_resource_group" "tf_azure_guide" {

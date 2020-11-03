@@ -52,7 +52,7 @@ pipeline {
         }
         stage ('Initialize Mven') {
             steps {
-                sh 'mvn version'
+                sh 'mvn verify'
             }
         }
         stage ('Initialize terraform') {

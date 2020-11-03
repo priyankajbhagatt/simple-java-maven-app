@@ -55,7 +55,7 @@ pipeline {
                 sh 'mvn verify'
             }
         }
-        stage ('Initialize terraform') {
+        stage ('Check terraform Version') {
             steps {
                 sh 'terraform version'
             }

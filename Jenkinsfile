@@ -65,5 +65,10 @@ pipeline {
                 sh 'terraform init'
             }
         }
+         stage ('Plan terraform') {
+            steps {
+                sh 'terraform plan'
+            }
+        }
     }
 }

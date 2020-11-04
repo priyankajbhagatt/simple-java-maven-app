@@ -8,7 +8,7 @@ pipeline {
    
     
     stages {
-        Stage ('Git Checkout Master'){
+        /*Stage ('Git Checkout Master'){
             steps {
             git credentialsId: '47222948-2be9-41d3-9afa-84568360ae36', branch: 'master', url: 'https://github.com/priyankajbhagatt/simple-java-maven-app'
             echo 'Master Branch'

@@ -19,15 +19,15 @@ pipeline {
             }
             post {
                 success {
-                    junit 'target/surefire-reports/**/*.xml' 
+                    junit 'target/surefire-reports/*
                 }
             }
-        }
+        }*/
         //stage ('Initialize Mven') {
          //   steps {
          //       sh 'mvn verify'
           //  }
-       // }*/
+       // }
         stage ('Check terraform Version') {
             steps {
                 sh 'terraform version'

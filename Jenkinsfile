@@ -19,11 +19,11 @@ pipeline {
                 }
             }
         }
-        stage ('Initialize Mven') {
-            steps {
-                sh 'mvn verify'
-            }
-        }
+        //stage ('Initialize Mven') {
+         //   steps {
+         //       sh 'mvn verify'
+          //  }
+       // }
         stage ('Check terraform Version') {
             steps {
                 sh 'terraform version'
@@ -35,9 +35,11 @@ pipeline {
             }
         }
          stage ('Plan terraform') {
-            steps {
+            steps 
+            {
                 sh 'terraform plan'
             }
+         
         }
     }
 }

@@ -8,8 +8,12 @@ pipeline {
    
     
     stages {
+        Stage('Git Checkout Master'){
+            git credentialsId: '47222948-2be9-41d3-9afa-84568360ae36', branch: 'master', url: 'https://github.com/priyankajbhagatt/simple-java-maven-app'
+            
+        }
        
-        stage ('Build') {
+        /*stage ('Build') {
             steps {
                 sh 'mvn -Dmaven.test.failure.ignore=true install' 
             }
@@ -23,7 +27,7 @@ pipeline {
          //   steps {
          //       sh 'mvn verify'
           //  }
-       // }
+       // }*/
         stage ('Check terraform Version') {
             steps {
                 sh 'terraform version'
@@ -31,7 +35,10 @@ pipeline {
         }
         stage ('Validate terraform') {
             steps {
-                sh 'terraform validate'
+                withCredentials([azureServicePrincipal('Azure')]) {
+                  sh 'terraform validate'
+}
+              
             }
         }
         stage ('Initialize terraform') {

@@ -29,6 +29,11 @@ pipeline {
                 sh 'terraform version'
             }
         }
+        stage ('Validate terraform') {
+            steps {
+                sh 'terraform validate'
+            }
+        }
         stage ('Initialize terraform') {
             steps {
                 sh 'terraform init'

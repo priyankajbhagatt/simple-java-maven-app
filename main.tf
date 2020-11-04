@@ -74,7 +74,7 @@ resource "azurerm_network_interface" "tf-guide-nic" {
   name                      = "${var.prefix}tf-guide-nic"
   location                  = "${var.location}"
   resource_group_name       = "${azurerm_resource_group.tf_azure_guide.name}"
-  network_security_group_id = "${azurerm_network_security_group.tf-guide-sg.id}"
+ # network_security_group_id = "${azurerm_network_security_group.tf-guide-sg.id}"
 
   ip_configuration {
     name                          = "${var.prefix}ipconfig"

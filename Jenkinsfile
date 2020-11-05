@@ -55,6 +55,7 @@ pipeline {
                 sh 'terraform init'
             }
         }
+        }
          stage ('Plan terraform') {
             steps 
             {
@@ -62,7 +63,7 @@ pipeline {
                     sh 'az login --service-principal -u $CLIENT_ID -p $CLIENT_SECRET -t $TENANT_ID'
                 sh 'terraform plan'
             }
-         
+            }
         }
     }
 }

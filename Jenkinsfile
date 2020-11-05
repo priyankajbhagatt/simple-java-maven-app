@@ -12,18 +12,19 @@ pipeline {
       client_secret = credentials('client-secret-jenkins-sp')
      */
     stages {
+        stage ('Git Checkout Feature'){
+            steps {
+            git credentialsId: '47222948-2be9-41d3-9afa-84568360ae36', branch: 'feature', url: 'https://github.com/priyankajbhagatt/simple-java-maven-app'
+            echo 'Feature Branch'
+        }
+        }
         stage ('Git Checkout Master'){
             steps {
             git credentialsId: '47222948-2be9-41d3-9afa-84568360ae36', branch: 'master', url: 'https://github.com/priyankajbhagatt/simple-java-maven-app'
             echo 'Master Branch'
         }
         }
-       stage ('Git Checkout Feature'){
-            steps {
-            git credentialsId: '47222948-2be9-41d3-9afa-84568360ae36', branch: 'feature', url: 'https://github.com/priyankajbhagatt/simple-java-maven-app'
-            echo 'Feature Branch'
-        }
-        }
+       
         /*stage ('Build') {
             steps {
                 sh 'mvn -Dmaven.test.failure.ignore=true install' 

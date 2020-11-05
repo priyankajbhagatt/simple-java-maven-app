@@ -5,8 +5,12 @@ pipeline {
         jdk 'jdk1.8'
         terraform 'terraform'
     }
-   
-    
+     environment {
+      subscription_id = credentials('azure-subscription-id')
+      tenant_id = credentials('azure-tenant-id')
+      client_id = credentials('client-id-jenkins-sp')
+      client_secret = credentials('client-secret-jenkins-sp')
+     }
     stages {
         stage ('Git Checkout'){
             steps {

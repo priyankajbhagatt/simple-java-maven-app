@@ -5,12 +5,12 @@ pipeline {
         jdk 'jdk1.8'
         terraform 'terraform'
     }
-     environment {
+     /*environment {
       subscription_id = credentials('azure-subscription-id')
       tenant_id = credentials('azure-tenant-id')
       client_id = credentials('client-id-jenkins-sp')
       client_secret = credentials('client-secret-jenkins-sp')
-     }
+     */
     stages {
         stage ('Git Checkout'){
             steps {
@@ -42,6 +42,7 @@ pipeline {
         stage ('Validate terraform') {
             steps {
                 withCredentials([azureServicePrincipal('Azure')]) {
+                    sh 'az login --service-principal -u $CLIENT_ID -p $CLIENT_SECRET -t $TENANT_ID'
                   sh 'terraform validate'
 }
               
@@ -49,12 +50,16 @@ pipeline {
         }
         stage ('Initialize terraform') {
             steps {
+                withCredentials([azureServicePrincipal('Azure')]) {
+                    sh 'az login --service-principal -u $CLIENT_ID -p $CLIENT_SECRET -t $TENANT_ID'
                 sh 'terraform init'
             }
         }
          stage ('Plan terraform') {
             steps 
             {
+                withCredentials([azureServicePrincipal('Azure')]) {
+                    sh 'az login --service-principal -u $CLIENT_ID -p $CLIENT_SECRET -t $TENANT_ID'
                 sh 'terraform plan'
             }
          

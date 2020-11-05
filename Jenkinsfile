@@ -51,7 +51,7 @@ pipeline {
         stage ('Initialize terraform') {
             steps {
                 withCredentials([azureServicePrincipal('Azure')]) {
-                    sh 'az login --service-principal -u $CLIENT_ID -p $CLIENT_SECRET -t $TENANT_ID'
+                    //sh 'az login --service-principal -u $CLIENT_ID -p $CLIENT_SECRET -t $TENANT_ID'
                 sh 'terraform init'
             }
         }
@@ -60,7 +60,7 @@ pipeline {
             steps 
             {
                 withCredentials([azureServicePrincipal('Azure')]) {
-                    sh 'az login --service-principal -u $CLIENT_ID -p $CLIENT_SECRET -t $TENANT_ID'
+                    //sh 'az login --service-principal -u $CLIENT_ID -p $CLIENT_SECRET -t $TENANT_ID'
                 sh 'terraform plan'
             }
             }

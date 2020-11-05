@@ -12,13 +12,18 @@ pipeline {
       client_secret = credentials('client-secret-jenkins-sp')
      */
     stages {
-        stage ('Git Checkout'){
+        stage ('Git Checkout Master'){
             steps {
             git credentialsId: '47222948-2be9-41d3-9afa-84568360ae36', branch: 'master', url: 'https://github.com/priyankajbhagatt/simple-java-maven-app'
             echo 'Master Branch'
         }
         }
-       
+       stage ('Git Checkout Feature'){
+            steps {
+            git credentialsId: '47222948-2be9-41d3-9afa-84568360ae36', branch: 'feature', url: 'https://github.com/priyankajbhagatt/simple-java-maven-app'
+            echo 'Feature Branch'
+        }
+        }
         /*stage ('Build') {
             steps {
                 sh 'mvn -Dmaven.test.failure.ignore=true install' 
@@ -56,14 +61,14 @@ pipeline {
             }
         }
         }
-         stage ('Plan terraform') {
+         /*stage ('Plan terraform') {
             steps 
             {
                 withCredentials([azureServicePrincipal('Azure')]) {
                     sh 'az login --service-principal -u $CLIENT_ID -p $CLIENT_SECRET -t $TENANT_ID'
                 sh 'terraform plan'
             }
-            }
+            }*/
         }
     }
 }

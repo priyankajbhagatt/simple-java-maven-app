@@ -3,7 +3,7 @@ pipeline {
     tools {
         maven 'Maven3'
         jdk 'jdk1.8'
-        terraform 'terraform'
+        terraform 'terraform13.5'
     }
      /*environment {
       subscription_id = credentials('azure-subscription-id')

@@ -12,12 +12,12 @@ pipeline {
       client_secret = credentials('client-secret-jenkins-sp')
      */
     stages {
-        stage ('Git Checkout Feature'){
+        /*stage ('Git Checkout Feature'){
             steps {
             git credentialsId: '47222948-2be9-41d3-9afa-84568360ae36', branch: 'feature', url: 'https://github.com/priyankajbhagatt/simple-java-maven-app'
             echo 'Feature Branch'
         }
-        }
+        }*/
         stage ('Git Checkout Master'){
             steps {
             git credentialsId: '47222948-2be9-41d3-9afa-84568360ae36', branch: 'master', url: 'https://github.com/priyankajbhagatt/simple-java-maven-app'
@@ -63,8 +63,8 @@ pipeline {
               def ret1 = sh (${TF_COMMAND2})
               println "[${TF_COMMAND2}: successfull...Auto Applying terraform Script"
        
-       
-       
+			}}}}}
+    }}
        
         /*stage ('Build') {
             steps {
@@ -81,7 +81,7 @@ pipeline {
          //       sh 'mvn verify'
           //  }
        // }
-        stage ('Check terraform Version') {
+        /*stage ('Check terraform Version') {
             steps {
                 sh 'terraform version'
             }
@@ -169,4 +169,4 @@ pipeline {
             }
         }
         }
-    }
+    }*/

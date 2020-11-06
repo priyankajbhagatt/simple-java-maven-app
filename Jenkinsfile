@@ -43,7 +43,9 @@ pipeline {
 
  
 
-          
+          for (stack in TF_STACK) {
+
+                          def TF_EXEC_PATH = "terraform/environments/"+stack
 
                           //def TF_EXEC_PATH = "terraform/environments/"+stack
 

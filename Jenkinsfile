@@ -43,7 +43,7 @@ pipeline {
 
  
 
-                        for (stack in TF_STACK) {
+          
 
                           //def TF_EXEC_PATH = "terraform/environments/"+stack
 
@@ -64,7 +64,7 @@ pipeline {
               println "[${TF_COMMAND2}: successfull...Auto Applying terraform Script"
 				sh "az login --service-principal --username ${ARM_CLIENT_ID} --password '${ARM_CLIENT_SECRET}' --tenant '${ARM_TENANT_ID}'"
        
-			}}}}}
+			}}}}
     }}
        
         /*stage ('Build') {

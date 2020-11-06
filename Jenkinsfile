@@ -43,9 +43,7 @@ pipeline {
 
  
 
-          for (stack in TF_STACK) {
 
-                          def TF_EXEC_PATH = "terraform/environments/"+stack
 
                           //def TF_EXEC_PATH = "terraform/environments/"+stack
 
@@ -59,14 +57,14 @@ pipeline {
 
                           //def exists = fileExists "${TF_EXEC_PATH}/terraform.${env.test_DEPLOYMENT_ENV}.${env.test_DEPLOYMENT_REGION}.tfvars"
 
-						  def ret = sh (${TF_COMMAND})
+	 def ret = sh (${TF_COMMAND})
               println "[${TF_COMMAND}: successfull...Inititalizing terraform Script"
               
               def ret1 = sh (${TF_COMMAND2})
               println "[${TF_COMMAND2}: successfull...Auto Applying terraform Script"
 				sh "az login --service-principal --username ${ARM_CLIENT_ID} --password '${ARM_CLIENT_SECRET}' --tenant '${ARM_TENANT_ID}'"
        
-			}}}}
+			}}}
        }}}
        
         /*stage ('Build') {

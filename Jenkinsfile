@@ -59,6 +59,7 @@ pipeline {
                                                 // Perform Azure login with provided ServicePrincipal credentials
 
                         sh "az login --service-principal --username ${ARM_CLIENT_ID} --password '${ARM_CLIENT_SECRET}' --tenant '${ARM_TENANT_ID}'"
+                    echo 'Azure sp login successfull'
                    // sh 'az login --service-principal -u $CLIENT_ID -p $CLIENT_SECRET -t $TENANT_ID'
                   sh 'terraform validate'
 }

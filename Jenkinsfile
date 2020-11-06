@@ -44,8 +44,6 @@ pipeline {
 
   agent any
 
-  options { timestamps() }
-
   environment {
 
     TF_DOCKER_IMAGE      = "test-tooling:${env.test_TOOLING_VERSION}"

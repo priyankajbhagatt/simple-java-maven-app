@@ -70,7 +70,15 @@ pipeline {
         }
         stage ('Initialize terraform') {
             steps {
-                withCredentials([azureServicePrincipal('Azure')]) {
+                withCredentials([azureServicePrincipal(credentialsId: 'az-jenkins-sp',
+
+                                                subscriptionIdVariable: 'ARM_SUBSCRIPTION_ID',
+
+                                                clientIdVariable: 'ARM_CLIENT_ID',
+
+                                                clientSecretVariable: 'ARM_CLIENT_SECRET',
+
+                                                tenantIdVariable: 'ARM_TENANT_ID')]) {
                     //sh 'az login --service-principal -u $CLIENT_ID -p $CLIENT_SECRET -t $TENANT_ID'
                 sh 'terraform init'
             }
@@ -78,12 +86,21 @@ pipeline {
         }
          stage ('Plan terraform') {
             steps 
-            {
+            { withCredentials([azureServicePrincipal(credentialsId: 'az-jenkins-sp',
+
+                                                subscriptionIdVariable: 'ARM_SUBSCRIPTION_ID',
+
+                                                clientIdVariable: 'ARM_CLIENT_ID',
+
+                                                clientSecretVariable: 'ARM_CLIENT_SECRET',
+
+                                                tenantIdVariable: 'ARM_TENANT_ID')]) {
                 //withCredentials([azureServicePrincipal('Azure')]) {
                //     sh 'az login --service-principal -u $CLIENT_ID -p $CLIENT_SECRET -t $TENANT_ID'
                 sh 'terraform plan'
             }
             }
+         }
         stage ('Apply terraform') {
             steps {
                 withCredentials([azureServicePrincipal(credentialsId: 'az-jenkins-sp',
@@ -99,7 +116,7 @@ pipeline {
                       sh 'terraform apply'
                      echo 'terraform apply'
 
-                      sh "az login --service-principal --username ${ARM_CLIENT_ID} --password '${ARM_CLIENT_SECRET}' --tenant '${ARM_TENANT_ID}'"
+                      sh 'az login --service-principal --username ${ARM_CLIENT_ID} --password '${ARM_CLIENT_SECRET}' --tenant '${ARM_TENANT_ID}''
                     echo 'Azure sp login successfull'
                    // sh 'az login --service-principal -u $CLIENT_ID -p $CLIENT_SECRET -t $TENANT_ID'
                 

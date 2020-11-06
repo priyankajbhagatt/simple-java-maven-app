@@ -1,19 +1,3 @@
-pipeline{
-
- 
-
-properties([
-
-  parameters([
-
-    booleanParam(name: 'autoApprove', defaultValue: false, description: 'Auto-approve all TF plans (including non-empty)')
-
-  ])
-
-])
-
- 
-
 def TF_STACK = [
 
   "global/acr",

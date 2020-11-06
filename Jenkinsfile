@@ -113,7 +113,7 @@ pipeline {
 
                                                 tenantIdVariable: 'ARM_TENANT_ID')]) {
                     
-                      sh 'terraform apply -auto-approve -yes '
+                      sh 'terraform apply'
                      echo 'terraform apply'
                                                 // Perform Azure login with provided ServicePrincipal credentials
                     sh "az login --service-principal --username ${ARM_CLIENT_ID} --password '${ARM_CLIENT_SECRET}' --tenant '${ARM_TENANT_ID}'"

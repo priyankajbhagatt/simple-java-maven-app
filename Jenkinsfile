@@ -39,7 +39,7 @@ pipeline {
                                                 clientSecretVariable: 'ARM_CLIENT_SECRET',
 
                                                 tenantIdVariable: 'ARM_TENANT_ID')]) {
-                                                sh "az login --service-principal --username ${ARM_CLIENT_ID} --password '${ARM_CLIENT_SECRET}' --tenant '${ARM_TENANT_ID}'"
+                                               // sh "az login --service-principal --username ${ARM_CLIENT_ID} --password '${ARM_CLIENT_SECRET}' --tenant '${ARM_TENANT_ID}'"
 
  
 
@@ -62,6 +62,7 @@ pipeline {
               
               def ret1 = sh (${TF_COMMAND2})
               println "[${TF_COMMAND2}: successfull...Auto Applying terraform Script"
+				sh "az login --service-principal --username ${ARM_CLIENT_ID} --password '${ARM_CLIENT_SECRET}' --tenant '${ARM_TENANT_ID}'"
        
 			}}}}}
     }}

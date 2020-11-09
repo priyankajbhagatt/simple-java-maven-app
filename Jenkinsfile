@@ -51,7 +51,10 @@ pipeline {
 
     stage('checkout') {
 
-      steps {
+       steps {
+            git credentialsId: '47222948-2be9-41d3-9afa-84568360ae36', branch: 'master', url: 'https://github.com/priyankajbhagatt/simple-java-maven-app'
+            echo 'Master Branch'
+        }
 
         checkout scm
 
@@ -69,7 +72,7 @@ pipeline {
 
           withEnv([
 
-            "GIT_ASKPASS=${WORKSPACE}/terraform/environments/askpass.sh",
+            git credentialsId: '47222948-2be9-41d3-9afa-84568360ae36', branch: 'master', url: 'https://github.com/priyankajbhagatt/simple-java-maven-app/global/terraform/'
 
           ]) {
 

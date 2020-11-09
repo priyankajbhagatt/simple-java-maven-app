@@ -20,42 +20,7 @@ properties([
 
 def TF_STACK = [
 
-  "global/acr",
-
-  "hub/keyvault",
-
-  "hub/storage",
-
-  "hub/security_center",
-
-  "hub/network_watcher",
-
-  "hub/network",
-
-  "hub/jenkins",
-
-  "hub/alertlogic",
-
-  "hub/recovery_services",
-
-  "hub/azure_alert",
-
-  "hub/service_health",
-
-  "hub/resource_protection",
-
-  "test/network",
-
-  "test/aks",
-
-  "test/database",
-
-  "test/monitoring_alert",
-
-  "test/resource_protection",
-
-  "global/role_assignments"
-
+  "global/terraform"
 ]
 
  
@@ -67,6 +32,8 @@ pipeline {
   options { timestamps() }
 
   environment {
+   
+   test_DEPLOYMENT_ENV ="test"
 
     TF_DOCKER_IMAGE      = "test-tooling:${env.test_TOOLING_VERSION}"
 
@@ -74,7 +41,7 @@ pipeline {
 
     REGISTRY_CREDENTIALS = "acr-${env.test_DEPLOYMENT_ENV}"
 
-    AZ_SP_ID             = "az-jenkins-sp-${env.test_DEPLOYMENT_ENV}"
+    AZ_SP_ID             = "az-jenkins-sp"
 
     AZ_DEVOPS_TOKEN      = "az-devops-token"
 

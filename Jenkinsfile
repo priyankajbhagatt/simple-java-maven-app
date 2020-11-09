@@ -41,7 +41,7 @@ pipeline {
    
    test_DEPLOYMENT_ENV ="test"
 
-    TF_DOCKER_IMAGE      = "test-tooling:${env.test_TOOLING_VERSION}"
+   // TF_DOCKER_IMAGE      = "test-tooling:${env.test_TOOLING_VERSION}"
 
     //DOCKER_REGISTRY      = "https://${env.DEFAULT_ACR}"
 
@@ -125,15 +125,17 @@ pipeline {
 
                         for (stack in TF_STACK) {
 
-                          def TF_EXEC_PATH = "global/terraform/"+stack
+                          def TF_EXEC_PATH = "https://github.com/priyankajbhagatt/simple-java-maven-app/global/terraform"+stack
 
                           def TF_BACKEND_CONF = "-backend-config='storage_account_name=dntfstatetest${env.test_DEPLOYMENT_ENV}' -backend-config='key=test/${env.test_DEPLOYMENT_ENV}/${stack.split('/')[0]}-${env.test_DEPLOYMENT_REGION}/${stack.split('/')[1]}/terraform.tfstate'"
 
-                          def TF_COMMAND = "terraform init ${TF_BACKEND_CONF}; terraform plan -var-file terraform.${env.test_DEPLOYMENT_ENV}.${env.test_DEPLOYMENT_REGION}.tfvars -detailed-exitcode;"
+                          def TF_COMMAND = "terraform init ${TF_BACKEND_CONF}; terraform plan 
+                         //-var-file terraform.${env.test_DEPLOYMENT_ENV}.${env.test_DEPLOYMENT_REGION}.tfvars -detailed-exitcode;"
 
-                          def TF_COMMAND2 = "terraform apply -auto-approve -var-file terraform.${env.test_DEPLOYMENT_ENV}.${env.test_DEPLOYMENT_REGION}.tfvars"
+                          def TF_COMMAND2 = "terraform apply -auto-approve 
+                         //-var-file terraform.${env.test_DEPLOYMENT_ENV}.${env.test_DEPLOYMENT_REGION}.tfvars"
 
-                          def exists = fileExists "${TF_EXEC_PATH}/terraform.${env.test_DEPLOYMENT_ENV}.${env.test_DEPLOYMENT_REGION}.tfvars"
+                          def exists = fileExists "${TF_EXEC_PATH}/terraform.${env.test_DEPLOYMENT_ENV}.tfvars"
 
                           if (exists) {
 
@@ -180,10 +182,6 @@ pipeline {
                       }
 
                     }
-
-                  }
-
-                }
 
           }
 

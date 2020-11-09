@@ -111,7 +111,7 @@ global/terraform/
 
                         for (stack in TF_STACK) {
 
-                          def TF_EXEC_PATH = "terraform"+stack
+                          def TF_EXEC_PATH = "global/terraform/"+stack
 
                           def TF_BACKEND_CONF = "-backend-config='storage_account_name=dntfstatetest${env.test_DEPLOYMENT_ENV}' -backend-config='key=test/${env.test_DEPLOYMENT_ENV}/${stack.split('/')[0]}-${env.test_DEPLOYMENT_REGION}/${stack.split('/')[1]}/terraform.tfstate'"
 

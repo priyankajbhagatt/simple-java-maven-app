@@ -4,8 +4,6 @@
 
 import java.text.SimpleDateFormat
 
- 
-
 properties([
 
   parameters([
@@ -45,7 +43,6 @@ pipeline {
     AZ_DEVOPS_TOKEN      = "az-devops-token"
 	
 	test_DEPLOYMENT_ENV = "test"
-	
 
   }
 
@@ -113,7 +110,7 @@ pipeline {
 
                         for (stack in TF_STACK) {
 
-                          def TF_EXEC_PATH = "terraform/environments/"+stack
+                          def TF_EXEC_PATH = "terraform"+stack
 
                           def TF_BACKEND_CONF = "-backend-config='storage_account_name=dntfstatetest${env.test_DEPLOYMENT_ENV}' -backend-config='key=test/${env.test_DEPLOYMENT_ENV}/${stack.split('/')[0]}-${env.test_DEPLOYMENT_REGION}/${stack.split('/')[1]}/terraform.tfstate'"
 
@@ -156,8 +153,6 @@ pipeline {
                               sh "cd ${TF_EXEC_PATH} && ${TF_COMMAND2}"
 
                             }
-
-                          }
 
                           else
 

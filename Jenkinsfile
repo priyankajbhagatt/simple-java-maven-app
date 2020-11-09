@@ -215,8 +215,6 @@ pipeline {
 
     }
 
- */
-
   post {
 
     always {
@@ -227,6 +225,6 @@ pipeline {
 
   }
 
- 
+ */
 
 }

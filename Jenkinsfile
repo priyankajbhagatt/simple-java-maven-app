@@ -1,4 +1,4 @@
-@Library('pipeline-library') _
+//@Library('pipeline-library') _
 
  
 
@@ -180,45 +180,5 @@ pipeline {
       }
 
     }
-
- 
-
-    stage ('tag') {
-
-      steps {
-
-        withEnv([
-
-          "GIT_ASKPASS=${WORKSPACE}/terraform/environments/askpass.sh",
-
-        ]) {
-
-          withCredentials([usernamePassword(credentialsId: 'az-devops-token',
-
-                                        passwordVariable: 'GIT_PASSWORD',
-
-                                        usernameVariable: 'GIT_USERNAME')]) {
-
-            script {
-
-              env.TIMESTAMP = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss-Z").format(new Date())
-
-            }
-
-          gitTag(GIT_URL, "${env.test_DEPLOYMENT_ENV}-${env.test_DEPLOYMENT_REGION}-live", "Deployed @ ${TIMESTAMP}", AZ_DEVOPS_TOKEN)
-
-          }
-
-        }
-
-      }
-
-    }
-  post {
-    always {
-      cleanWs()
-
-    }
-
-  }
 }
+}	

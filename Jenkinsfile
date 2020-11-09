@@ -135,9 +135,9 @@ pipeline {
                           def TF_COMMAND2 = "terraform apply -auto-approve"
                          //-var-file terraform.${env.test_DEPLOYMENT_ENV}.${env.test_DEPLOYMENT_REGION}.tfvars"
                          
-                          sh "az login --service-principal --username ${ARM_CLIENT_ID} --password '${ARM_CLIENT_SECRET}' --tenant '${ARM_TENANT_ID}'"
-
-
+                          //sh "az login --service-principal --username ${ARM_CLIENT_ID} --password '${ARM_CLIENT_SECRET}' --tenant '${ARM_TENANT_ID}'"
+ 
+                         sh "${TF_COMMAND2}
                           def exists = fileExists "${TF_EXEC_PATH}/terraform.${env.test_DEPLOYMENT_ENV}.tfvars"
 
                           if (exists) {

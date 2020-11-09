@@ -70,11 +70,11 @@ pipeline {
 
         script{
 
-          withEnv([
+          //withEnv([
 
-            git credentialsId: '47222948-2be9-41d3-9afa-84568360ae36', branch: 'master', url: 'https://github.com/priyankajbhagatt/simple-java-maven-app/global/terraform/'
+            //git credentialsId: '47222948-2be9-41d3-9afa-84568360ae36', branch: 'master', url: 'https://github.com/priyankajbhagatt/simple-java-maven-app/global/terraform/'
 
-          ]) {
+         // ]) {
 
                // TF requires credentials for Azure RM provider.
 

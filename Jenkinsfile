@@ -1,10 +1,12 @@
-//@Library('pipeline-library') _
+@Library('pipeline-library') _
 
  
 
-//import java.text.SimpleDateFormat
+import java.text.SimpleDateFormat
 
-//properties([
+ 
+
+properties([
 
   parameters([
 
@@ -12,11 +14,49 @@
 
   ])
 
-//])
+])
 
  
 
+def TF_STACK = [
 
+  "global/acr",
+
+  "hub/keyvault",
+
+  "hub/storage",
+
+  "hub/security_center",
+
+  "hub/network_watcher",
+
+  "hub/network",
+
+  "hub/jenkins",
+
+  "hub/alertlogic",
+
+  "hub/recovery_services",
+
+  "hub/azure_alert",
+
+  "hub/service_health",
+
+  "hub/resource_protection",
+
+  "test/network",
+
+  "test/aks",
+
+  "test/database",
+
+  "test/monitoring_alert",
+
+  "test/resource_protection",
+
+  "global/role_assignments"
+
+]
 
  
 
@@ -24,7 +64,7 @@ pipeline {
 
   agent any
 
-  //options { timestamps() }
+  options { timestamps() }
 
   environment {
 
@@ -34,11 +74,9 @@ pipeline {
 
     REGISTRY_CREDENTIALS = "acr-${env.test_DEPLOYMENT_ENV}"
 
-    AZ_SP_ID             = "az-jenkins-sp"
+    AZ_SP_ID             = "az-jenkins-sp-${env.test_DEPLOYMENT_ENV}"
 
     AZ_DEVOPS_TOKEN      = "az-devops-token"
-	
-	test_DEPLOYMENT_ENV = "test"
 
   }
 
@@ -62,14 +100,13 @@ pipeline {
 
         script{
 
-          //withEnv([
+          withEnv([
 
-            //"GIT_ASKPASS=${WORKSPACE}/terraform/environments/askpass.sh",
+            "GIT_ASKPASS=${WORKSPACE}/terraform/environments/askpass.sh",
 
-          //]) {
+          ]) {
 
                // TF requires credentials for Azure RM provider.
-	
 
                 withCredentials([azureServicePrincipal(credentialsId: "${AZ_SP_ID}",
 
@@ -81,11 +118,11 @@ pipeline {
 
                                                 tenantIdVariable: 'ARM_TENANT_ID')]) {
 
-                 // withCredentials([usernamePassword(credentialsId: 'az-devops-token',
-//
-  //                                                passwordVariable: 'GIT_PASSWORD',
-//
-  //                                                usernameVariable: 'GIT_USERNAME')]) {
+                  withCredentials([usernamePassword(credentialsId: 'az-devops-token',
+
+                                                  passwordVariable: 'GIT_PASSWORD',
+
+                                                  usernameVariable: 'GIT_USERNAME')]) {
 
                     docker.withRegistry("${DOCKER_REGISTRY}", "${REGISTRY_CREDENTIALS}") {
 
@@ -103,15 +140,11 @@ pipeline {
 
                         sh "az login --service-principal --username ${ARM_CLIENT_ID} --password '${ARM_CLIENT_SECRET}' --tenant '${ARM_TENANT_ID}'"
 
- 	def TF_STACK = [
-
-global/terraform/
-
-]
+ 
 
                         for (stack in TF_STACK) {
 
-                          def TF_EXEC_PATH = "global/terraform/"+stack
+                          def TF_EXEC_PATH = "terraform/environments/"+stack
 
                           def TF_BACKEND_CONF = "-backend-config='storage_account_name=dntfstatetest${env.test_DEPLOYMENT_ENV}' -backend-config='key=test/${env.test_DEPLOYMENT_ENV}/${stack.split('/')[0]}-${env.test_DEPLOYMENT_REGION}/${stack.split('/')[1]}/terraform.tfstate'"
 
@@ -155,6 +188,8 @@ global/terraform/
 
                             }
 
+                          }
+
                           else
 
                             echo " terraform.${env.test_DEPLOYMENT_ENV}.${env.test_DEPLOYMENT_REGION}.tfvars doesn't exists in stack: ${stack} "
@@ -176,4 +211,57 @@ global/terraform/
       }
 
     }
-}	
+
+ 
+
+    stage ('tag') {
+
+      steps {
+
+        withEnv([
+
+          "GIT_ASKPASS=${WORKSPACE}/terraform/environments/askpass.sh",
+
+        ]) {
+
+          withCredentials([usernamePassword(credentialsId: 'az-devops-token',
+
+                                        passwordVariable: 'GIT_PASSWORD',
+
+                                        usernameVariable: 'GIT_USERNAME')]) {
+
+            script {
+
+              env.TIMESTAMP = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss-Z").format(new Date())
+
+            }
+
+          gitTag(GIT_URL, "${env.test_DEPLOYMENT_ENV}-${env.test_DEPLOYMENT_REGION}-live", "Deployed @ ${TIMESTAMP}", AZ_DEVOPS_TOKEN)
+
+          }
+
+        }
+
+      }
+
+    }
+
+ 
+
+  }
+
+ 
+
+  post {
+
+    always {
+
+      cleanWs()
+
+    }
+
+  }
+
+ 
+
+}

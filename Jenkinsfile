@@ -87,11 +87,11 @@ pipeline {
 
                                                 tenantIdVariable: 'ARM_TENANT_ID')]) {
 
-                  withCredentials([usernamePassword(credentialsId: 'az-devops-token',
+                  /*withCredentials([usernamePassword(credentialsId: 'az-devops-token',
 
                                                   passwordVariable: 'GIT_PASSWORD',
 
-                                                  usernameVariable: 'GIT_USERNAME')]) {
+                                                  usernameVariable: 'GIT_USERNAME')]) {*/
 
                     docker.withRegistry("${DOCKER_REGISTRY}", "${REGISTRY_CREDENTIALS}") {
 

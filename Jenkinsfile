@@ -43,7 +43,7 @@ pipeline {
 
     AZ_SP_ID             = "az-jenkins-sp"
 
-    AZ_DEVOPS_TOKEN      = "az-devops-token"
+    //AZ_DEVOPS_TOKEN      = "az-devops-token"
 
   }
 
@@ -63,7 +63,13 @@ pipeline {
 
  
 
-    stage('init plan apply') {
+    stage('init ') {
+
+      steps {
+       sh 'terraform init'
+      }}
+       
+       stage('plan ') {
 
       steps {
 

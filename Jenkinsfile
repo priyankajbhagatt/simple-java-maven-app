@@ -118,9 +118,6 @@ pipeline {
  
 
                         // Perform Azure login with provided ServicePrincipal credentials
-
-                        sh "az login --service-principal --username ${ARM_CLIENT_ID} --password '${ARM_CLIENT_SECRET}' --tenant '${ARM_TENANT_ID}'"
-
  
 
                         for (stack in TF_STACK) {
@@ -132,9 +129,14 @@ pipeline {
                           def TF_COMMAND = "terraform init"
                          //${TF_BACKEND_CONF}; terraform plan 
                          //-var-file terraform.${env.test_DEPLOYMENT_ENV}.${env.test_DEPLOYMENT_REGION}.tfvars -detailed-exitcode;"
+                         
+                         sh "${TF_COMMAND}"
 
                           def TF_COMMAND2 = "terraform apply -auto-approve"
                          //-var-file terraform.${env.test_DEPLOYMENT_ENV}.${env.test_DEPLOYMENT_REGION}.tfvars"
+                         
+                          sh "az login --service-principal --username ${ARM_CLIENT_ID} --password '${ARM_CLIENT_SECRET}' --tenant '${ARM_TENANT_ID}'"
+
 
                           def exists = fileExists "${TF_EXEC_PATH}/terraform.${env.test_DEPLOYMENT_ENV}.tfvars"
 

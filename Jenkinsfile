@@ -41,7 +41,7 @@ pipeline {
                                                 tenantIdVariable: 'ARM_TENANT_ID')]) {
                                                // sh "az login --service-principal --username ${ARM_CLIENT_ID} --password '${ARM_CLIENT_SECRET}' --tenant '${ARM_TENANT_ID}'"
 
- sh 'terraform initt'
+ sh 'terraform init'
 
 
 
@@ -56,8 +56,9 @@ pipeline {
 						  //-var-file terraform.${env.test_DEPLOYMENT_ENV}.${env.test_DEPLOYMENT_REGION}.tfvars"
 
                           //def exists = fileExists "${TF_EXEC_PATH}/terraform.${env.test_DEPLOYMENT_ENV}.${env.test_DEPLOYMENT_REGION}.tfvars"
-
-	 def ret = sh (${TF_COMMAND})
+sh (${TF_COMMAND})
+		   println "[${TF_COMMAND}: successfull...Inititalizing terraform Script by defining command"
+		def ret = sh (${TF_COMMAND})
               println "[${TF_COMMAND}: successfull...Inititalizing terraform Script"
               
               def ret1 = sh (${TF_COMMAND2})

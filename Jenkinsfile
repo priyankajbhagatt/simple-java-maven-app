@@ -218,10 +218,6 @@ pipeline {
 
  
 
-  }
-
- 
-
   post {
 
     always {

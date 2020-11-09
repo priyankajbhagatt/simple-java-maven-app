@@ -16,11 +16,7 @@
 
  
 
-def TF_STACK = [
 
-global/terraform
-
-]
 
  
 
@@ -73,6 +69,11 @@ pipeline {
           //]) {
 
                // TF requires credentials for Azure RM provider.
+		def TF_STACK = [
+
+global/terraform
+
+]
 
                 withCredentials([azureServicePrincipal(credentialsId: "${AZ_SP_ID}",
 

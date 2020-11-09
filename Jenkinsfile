@@ -127,7 +127,7 @@ pipeline {
                          
                            println "[${stack}]"
                           def TF_BACKEND_CONF = "-backend-config='storage_account_name=dntfstatetest${env.test_DEPLOYMENT_ENV}' -backend-config='key=test/${env.test_DEPLOYMENT_ENV}/${stack.split('/')[0]}-${env.test_DEPLOYMENT_REGION}/${stack.split('/')[1]}/terraform.tfstate'"
-
+ println "[${TF_BACKEND_CONF}]"
                           def TF_COMMAND = "terraform init"
                          //${TF_BACKEND_CONF}; terraform plan 
                          //-var-file terraform.${env.test_DEPLOYMENT_ENV}.${env.test_DEPLOYMENT_REGION}.tfvars -detailed-exitcode;"

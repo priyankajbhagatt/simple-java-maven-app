@@ -214,16 +214,13 @@ pipeline {
       }
 
     }
-
-  }
   post {
-
     always {
-
       cleanWs()
 
     }
 
   }
 
+}
 }

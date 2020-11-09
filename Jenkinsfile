@@ -69,11 +69,7 @@ pipeline {
           //]) {
 
                // TF requires credentials for Azure RM provider.
-		def TF_STACK = [
-
-global/terraform
-
-]
+	
 
                 withCredentials([azureServicePrincipal(credentialsId: "${AZ_SP_ID}",
 
@@ -107,7 +103,11 @@ global/terraform
 
                         sh "az login --service-principal --username ${ARM_CLIENT_ID} --password '${ARM_CLIENT_SECRET}' --tenant '${ARM_TENANT_ID}'"
 
- 
+ 	def TF_STACK = [
+
+global/terraform/
+
+]
 
                         for (stack in TF_STACK) {
 

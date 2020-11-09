@@ -1,4 +1,4 @@
-//@Library('pipeline-library') _
+@Library('pipeline-library') _
 
  
 
@@ -215,12 +215,7 @@ pipeline {
 
     }
 
- 
-
   }
-
- 
-
   post {
 
     always {
@@ -230,7 +225,5 @@ pipeline {
     }
 
   }
-
- 
 
 }

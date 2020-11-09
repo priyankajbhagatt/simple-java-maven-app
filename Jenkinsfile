@@ -10,7 +10,7 @@ properties([
 
   parameters([
 
-    booleanParam(name: 'autoApprove', defaultValue: true, description: 'Auto-approve all TF plans (including non-empty)')
+    booleanParam(name: 'autoApprove', defaultValue: 'true', description: 'Auto-approve all TF plans (including non-empty)')
 
   ])
 

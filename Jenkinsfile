@@ -183,7 +183,7 @@ pipeline {
 
  
 
-    stage ('tag') {
+   /* stage ('tag') {
 
       steps {
 
@@ -215,7 +215,7 @@ pipeline {
 
     }
 
- 
+ */
 
   post {
 

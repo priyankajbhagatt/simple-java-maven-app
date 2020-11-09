@@ -43,9 +43,9 @@ pipeline {
 
     TF_DOCKER_IMAGE      = "test-tooling:${env.test_TOOLING_VERSION}"
 
-    DOCKER_REGISTRY      = "https://${env.DEFAULT_ACR}"
+    //DOCKER_REGISTRY      = "https://${env.DEFAULT_ACR}"
 
-    REGISTRY_CREDENTIALS = "acr-${env.test_DEPLOYMENT_ENV}"
+    //REGISTRY_CREDENTIALS = "acr-${env.test_DEPLOYMENT_ENV}"
 
     AZ_SP_ID             = "az-jenkins-sp"
 
@@ -105,15 +105,15 @@ pipeline {
 
                                                   usernameVariable: 'GIT_USERNAME')]) {*/
 
-                    docker.withRegistry("${DOCKER_REGISTRY}", "${REGISTRY_CREDENTIALS}") {
+                    //docker.withRegistry("${DOCKER_REGISTRY}", "${REGISTRY_CREDENTIALS}") {
 
  
 
                       // Pull the Docker image from the registry
 
-                      docker.image(TF_DOCKER_IMAGE).pull()
+                  //    docker.image(TF_DOCKER_IMAGE).pull()
 
-                      docker.image(TF_DOCKER_IMAGE).inside() {
+                     // docker.image(TF_DOCKER_IMAGE).inside() {
 
  
 

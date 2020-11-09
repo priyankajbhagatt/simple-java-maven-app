@@ -137,7 +137,7 @@ pipeline {
                          
                           //sh "az login --service-principal --username ${ARM_CLIENT_ID} --password '${ARM_CLIENT_SECRET}' --tenant '${ARM_TENANT_ID}'"
  
-                         sh "${TF_COMMAND2}
+                         sh "${TF_COMMAND2}"
                           def exists = fileExists "${TF_EXEC_PATH}/terraform.${env.test_DEPLOYMENT_ENV}.tfvars"
 
                           if (exists) {

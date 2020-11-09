@@ -20,7 +20,7 @@ properties([
 
 def TF_STACK = [
 
-  "global/terraform"
+  "global/terraform",
   "global/test"
 ]
 
